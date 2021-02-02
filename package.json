@@ -1,0 +1,22 @@
+{
+  "name": "uploading-to-s3-using-graphql-api.",
+  "version": "1.0.0",
+  "description": "Showcasing how to upload to s3 on a graphql api.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/start/index.js",
+    "start":"node ./src/final/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "uploading-to-s3-using-graphql-api"
+  },
+  "author": "mwangikibui",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.19.2",
+    "aws-sdk": "^2.834.0",
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.7"
+  }
+}
