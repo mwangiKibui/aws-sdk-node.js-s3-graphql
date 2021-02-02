@@ -1,5 +1,5 @@
 {
-  "name": "uploading-to-s3-using-graphql-api.",
+  "name": "aws-node.js-sdk-s3.",
   "version": "1.0.0",
   "description": "Showcasing how to upload to s3 on a graphql api.",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "uploading-to-s3-using-graphql-api"
+    "url": "aws-node.js-sdk-s3"
   },
   "author": "mwangikibui",
   "license": "MIT",
