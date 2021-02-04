@@ -43,7 +43,7 @@ class MutationResolver {
         let fileStream = createReadStream();
         
 
-        fileStream.on("error", (error) => reject(error));
+        fileStream.on("error", (error) => console.error(error));
 
         params.Body = fileStream;
 
@@ -72,7 +72,8 @@ class MutationResolver {
         let params = {
             Bucket:bucketName,
             Key:'',
-            Body:''
+            Body:'',
+            ACL:'public-read'
         };
 
         let objects = [];

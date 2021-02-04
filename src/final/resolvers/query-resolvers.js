@@ -12,7 +12,7 @@ class QueryResolver {
     //fetching buckets.
     async fetchBuckets(){
 
-        const listBuckets = promisify(s3.listBuckets.bind(s3));
+        const listBuckets = promisify(this.s3.listBuckets.bind(this.s3));
 
         let result = await listBuckets().catch(console.log);
 
@@ -29,7 +29,7 @@ class QueryResolver {
             Bucket:bucketName
         };
 
-        let getObjects = promisify(s3.listObjects.bind(s3));
+        let getObjects = promisify(this.s3.listObjects.bind(this.s3));
 
         let result = await getObjects(params).catch(console.log)
         
