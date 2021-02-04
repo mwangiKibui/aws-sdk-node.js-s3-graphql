@@ -1,8 +1,8 @@
 ### Using AWS Node.js SDK to implement s3 functionalities on a GraphQL API
 
-AWS is a subsidiary of amazon offering cloud computing services. The services revolve around storage, application, and infrastructure based. S3 is the storage service provided by AWS. Node.js SDK from AWS enables one to access functionalities offered by the platform from a Node.js application. GraphQL on the other hand is a server-side runtime for executing queries based on a type system defined on the data providing a query language.
+AWS is a subsidiary of amazon offering cloud computing services. The services revolve around storage, application, and infrastructure based. S3 is the storage service provided by AWS. Node.js SDK from AWS enables one to access functionalities offered by the platform from a Node.js application. GraphQl on the other hand is a server-side runtime for executing queries based on a type system defined on the data providing a query language.
 
-In this article, we will walk through the steps of creating an AWS account and implementing various s3 functionalities using Node.js AWS SDK.
+In this article, we will walk through the various s3 functionalities using Node.js AWS SDK.
 
 #### prerequisites
 
@@ -24,19 +24,19 @@ To follow along in this article, it is helpful to have the following:
 
 - [Setting up the development server](#setting-up-the-development-server)
 
-- [Creating a s3 bucket](#creating-a-s3-bucket)
+- [Creating an s3 bucket](#creating-an-s3-bucket)
 
 - [Fetching created s3 buckets](#fetching-created-s3-buckets)
 
-- [Uploading a single object to s3 bucket](#uploading-a-single-file-to-s3-bucket)
+- [Uploading a single object to s3 bucket](#uploading-a-single-object-to-s3-bucket)
 
-- [Uploading multiple objects to s3 bucket](#uploading-multiple-files-to-s3-bucket)
+- [Uploading multiple objects to s3 bucket](#uploading-multiple-objects-to-s3-bucket)
 
-- [Fetching uploaded objects from s3 bucket](#fetching-uploaded-files-from-s3-bucket)
+- [Fetching uploaded objects from s3 bucket](#fetching-uploaded-objects-from-s3-bucket)
 
-- [Deleting a single object from s3 bucket](#deleting-a-single-file-from-s3-bucket)
+- [Deleting a single object from s3 bucket](#deleting-a-single-object-from-s3-bucket)
 
-- [Deleting multiple objects from s3 bucket](#deleting-multiple-files-from-s3-bucket)
+- [Deleting multiple objects from s3 bucket](#deleting-multiple-objects-from-s3-bucket)
 
 - [Deleting a s3 bucket](#deleting-a-s3-bucket)
 
@@ -60,7 +60,7 @@ To obtain your security credentials, follow the following steps:
 
 - On the new page, click on `Access keys (access key ID and secret access key)`.
 
-- If you already have an `Access Key ID` and a `Secret access key` feel free to use them. But if you don't have then click `Create New Access Key`.
+- If you already have an `Access Key ID` and a `Secret access key` feel free to use them. But if you don't have one, click the `Create New Access Key` button.
 
 - Download the `Key File`.
 
@@ -72,15 +72,15 @@ To obtain your security credentials, follow the following steps:
 region=//the region from the URL. e.g us-east-2
 ```
 
-- After setting the region, we are good to proceed to the next step.
+- After setting the region, we are good for the next step.
 
 ### Setting up the development server
 
-To set up the development server, clone this [Github repository](remember to enter a link here). In the repository, in the `src` directory, there is the start, and final folder. Through out the article, we will be working on the start folder. In case you encounter an error or you want to compare your code feel free to check the final folder.
+To set up the development server, clone this [Github repository](https://github.com/mwangiKibui/aws-sdk-node.js-s3-graphql). In the repository, in the `src` directory, there is the start and final folder. Throughout the article, we will be working on the start folder. In case you encounter an error or you want to compare your code, feel free to check the final folder.
 
-From the `Key File` you downloaded copy the data to `.env` file appropriately. Ensure you match the names so that there is no conflict.
+From the `Key File` you downloaded copy the data to the `.env` file appropriately. Ensure you match the names so that there is no conflict.
 
-In the cloned folder, run the following command to install the neccessary dependencies:
+In the cloned folder, run the following command to install the necessary dependencies:
 
 ```bash
 npm install
@@ -88,11 +88,11 @@ npm install
 
 Proceed to the start folder and go through the schema files to understand how we are structuring the data. Our focus throughout the article shall be on the resolvers folder. It is therefore helpful to have a grasp of the underlying schema.
 
-### Creating a s3 bucket
+### Creating an s3 bucket
 
 An s3 bucket is the foundational storage instance in s3. It consists of folders and objects. The objects are the files. Data in the bucket is stored as either a folder or an object.
 
-To create a bucket, we implement the following functionality in the `resolvers/mutation-resolvers.js` file under `createBucket()` function:
+To create a bucket, we implement the following functionality in the `resolvers/mutation-resolvers.js` under `createBucket()` function:
 
 ```javascript
 //create a bucket.
@@ -116,13 +116,13 @@ async createBucket(bucketName){
 
 From the above implementation:
 
-- Creating a params object with key `Bucket` to point at the sent `bucketName`.
+- Create params object with the key `Bucket` to hold the sent `bucketName`.
 
 - Promisify the `createBucket()` function from s3.
 
 - Call the `createBucket()` function passing along the params object.
 
-- Send back response matching the schema output.
+- Send back a response matching the schema.
 
 To test this:
 
@@ -136,7 +136,7 @@ npm run dev
 
 - In the URL section, enter the URL logged in the console.
 
-- In the workspace enter the following mutation:
+- In the workspace paste the following mutation:
 
 ```javascript
 mutation CreateBucket {
@@ -153,9 +153,9 @@ mutation CreateBucket {
 
 - Having created a bucket, we will fetch the created buckets to verify the bucket was created.
 
-### Fetching created buckets
+### Fetching created s3 buckets
 
-In the `resolvers/query-resolvers.js` file, we add up the functionality of fetching created buckets under `fetchBuckets()` function:
+In the `resolvers/query-resolvers.js`, we add up the functionality of fetching created buckets under `fetchBuckets()` function:
 
 ```javascript
 //fetching buckets.
@@ -178,13 +178,13 @@ From above:
 
 - Fetch the buckets from s3.
 
-- Map through the result in order to correspond with the schema output.
+- Map through the result in order to correspond with the schema.
 
 To test this:
 
 - Ensure that the development is still running.
 
-- Head over to Altair GraphQl Client, open a different tab, and enter the following query in the workspace:
+- Head over to Altair GraphQl Client, open a different tab, and paste the following query in the workspace:
 
 ```javascript
 query FetchBuckets{
@@ -194,9 +194,9 @@ query FetchBuckets{
 
 - Hit the play button. The newly created bucket should be present.
 
-### Uploading a single file to s3 bucket
+### Uploading a single object to s3 bucket
 
-After confirming that the bucket was created successfully, its time we upload some objects to the bucket. The objects are the files. They can be images, videos, audios, texts, and so much more. In this article we will focus on images. Feel free to choose any file you want.
+After confirming that the bucket was created successfully, it's time we upload some objects to the bucket. The objects are the files. They can be images, videos, audios, texts, and so much more. In this article, we will focus on images. Feel free to choose any file you want.
 
 In `resolvers/mutation-resolvers.js` under `uploadObject()` function, we add up the functionality of uploading a single object to s3 bucket:
 
@@ -242,15 +242,15 @@ async uploadObject(file,bucketName){
 
 From above:
 
-- Create a params object with keys concerning the name of the bucket to which we are uploading the object, the key of the object, the body of the object, and a permission to allow `public-read` of the object.
+- Create params object with keys concerning the name of the bucket to which we are uploading the object, the key of the object, the body of the object, and permission to allow `public-read` of the object.
 
 - Destructure the `createReadStream` and `filename` from the file.
 
-- Stream the contents of the file, upon error, we log the error.
+- Stream the contents of the file. Upon error, we log the error.
 
 - Set the streamed content as the body of the object.
 
-- Set the key of the object using specific timestamp and its file extension. The object will be stored in the images folder.
+- Set the key of the object using a specific timestamp and its file extension. The object will be stored in the images folder.
 
 - Promisify the upload function from s3.
 
@@ -262,7 +262,7 @@ To test this:
 
 - Ensure that the development server is still running.
 
-- Head over to Altair GraphQl Client, open a separate tab, and in the workspace enter the following mutation:
+- Head over to Altair GraphQl Client, open a separate tab, and in the workspace paste the following mutation:
 
 ```javascript
 mutation ObjectUpload($object:Upload!) {
@@ -273,17 +273,17 @@ mutation ObjectUpload($object:Upload!) {
 }
 ```
 
-- The `$Object` is the dynamic object we are going to select from our computer, `Upload` is it's type from GraphQl.
+- The `$Object` is the dynamic object we are going to select from the computer, `Upload` is its type from GraphQl.
 
 - To select the object, click `variables` down there. Then click `Add files`. In the field that pops up, change the name from `file` to `object`. Then click `select files` on the right to select any object from your computer. For consistency with the article, make sure you select an image.
 
 - After having selected an object, hit the play button and examine the results.
 
-- To confirm your object, after the response is sent back, copy the url to your browser and verify the object.
+- To confirm your object, after the response is sent back, copy the URL to your browser and verify the object.
 
 ### Uploading multiple objects to s3 bucket
 
-In the same way we upload a singular object to s3 bucket, we can also upload multiple objects to s3 bucket.
+In the same way, we upload a singular object to s3 bucket, we can also upload multiple objects to s3 bucket.
 
 In the same file, under `uploadObjects()`, we add up the functionality of uploading multiple objects:
 
@@ -336,11 +336,11 @@ async uploadObjects(files,bucketName){
 
 From above:
 
-- Create a params object with the bucket to upload to, the key of an object, body of an object, and the permission of reading the file.
+- Create params object with the bucket to upload to, the key of an object, body of an object, and the permission of reading the file.
 
-- Iniatilize an array to hold the data to be sent back as response.
+- Initialize an array to hold the data to be sent back as the response.
 
-- Loop through all of the uploaded objects. For each object we read it's content to set it as the body, get the timestamp and its file extension as its key in the images folder. upload the file to s3 bucket and then restructure the data returned as per the schema and push it to the previous initialized array.
+- Loop through all of the uploaded objects. For each object, we read its content to set it as the body, get the timestamp and its file extension as its key in the images folder. Upload the file to the s3 bucket and then restructure the data returned as per the schema and push it to the previous initialized array.
 
 - Return the array we have been pushing to as the output.
 
@@ -359,13 +359,13 @@ mutation ObjectsUpload($objects:[Upload!]!) {
 }
 ```
 
-- The `$objects` represent the dynamic objects we are uploading from our computer. They shall be multiple hence the array with type `Upload`. The array should not be empty and none of the files should be `null`. We also pass in the name of the bucket to upload to. If you are using a different bucket name feel free to change.
+- The `$objects` represent the dynamic objects we are uploading from the computer. They shall be multiple hence the array with type `Upload`. The array should not be empty and none of the files should be `null`. We also pass in the name of the bucket to upload to. If you are using a different bucket name feel free to change.
 
-- To select the files, click on `Variables` at the bottom left, click on `Add files`. In the field that pops up, toggle the button labelled `1` to represent `*` by simply clicking it. Change the name from `file` to `objects`. On the right, click `select files`. Using the `command` key of your computer, select multiple objects. Preferably, select images only. After selecting, you will see the number of files you have selected adjacent to the field.
+- To select the files, click on `Variables` at the bottom left, click on `Add files`. In the field that pops up, toggle the button labeled `1` to represent `*` by simply clicking it. Change the name from `file` to `objects`. On the right, click `select files`. Using the `command` key of your computer, select multiple objects. Preferably, select images only. After selecting, you will see the number of files you have selected adjacent to the field.
 
 - Hit the play button and examine the results.
 
-- You can verify the objects by visiting each url sent back from your browser.
+- You can verify the objects by visiting each URL sent back from your browser.
 
 ### Fetching uploaded objects from s3 bucket
 
@@ -401,7 +401,7 @@ async fetchObjects(bucketName){
 
 From above:
 
-- Create a params object with a key of `Bucket` representing the bucket name from which we are fetching the uploaded objects.
+- Create params object with a key of `Bucket` representing the bucket name from which we are fetching the uploaded objects.
 
 - Promisify the `listObjects()` function from s3.
 
@@ -424,15 +424,17 @@ query FetchObjects {
 }
 ```
 
+- If you are using a different bucket name feel free to change.
+
 - Hit the play button and examine the results.
 
-- Feel free to copy the url of any object, paste it in the browser and view that object.
+- Feel free to copy the URL of any object, paste it in the browser and view that object.
 
 ### Deleting a single object from s3 bucket
 
-Once an object is not needed anymore, to free up the space, you can always delete it from the bucket.
+Once an object is not needed anymore, to free up space, you can always delete it from the bucket.
 
-In `resolvers/mutation-resolvers.js` file, under `deleteObject()` function, we implement the functionality of deleting a single object from s3 bucket:
+In `resolvers/mutation-resolvers.js` , under `deleteObject()` function, we implement the functionality of deleting a single object from s3 bucket:
 
 ```javascript
 //delete object.
@@ -440,7 +442,7 @@ async deleteObject(bucketName,key){
 
     const params = {
         Bucket:bucketName,
-        Key:key
+        Key: key
     };
 
     let removeObject = promisify(this.s3.deleteObject.bind(this.s3));
@@ -521,9 +523,9 @@ async deleteObjects(bucketName,objectKeys){
 
 From above:
 
-- Create a params object. In it, we have `Bucket` which is the name of the bucket to delete from, `Delete` which encompases `Objects`, the array to which keys of objects to be deleted will be populated in.
+- Create a params object. In it, we have `Bucket` which is the name of the bucket to delete from, `Delete` which encompasses `Objects`, the array to which keys of objects to be deleted will be populated in.
 
-- Loop through the `objectKeys` passed populating the `Objects` array of the `Delete` key in `params` object.
+- Loop through the `objectKeys` passed populating the `Objects` array of the `Delete` key in the `params` object.
 
 - Promisify the `deleteObjects()` function from s3.
 
@@ -549,15 +551,15 @@ mutation DeleteObjects {
 }
 ```
 
-- From the tab of fetching objects, copy and paste atleast two object keys to the `objectKeys` array. If you have more objects, feel free to include more.
+- From the tab of fetching objects, copy and paste at least two object keys to the `objectKeys` array. If you have more objects, feel free to include more.
 
 - In case you are using a different bucket name, make sure you change it.
 
 - Hit the play button and examine the results.
 
-### Deleting a s3 bucket
+### Deleting an s3 bucket
 
-In case a s3 bucket is of no use anymore, you can always delete it. But to delete an s3 bucket, you have to make sure that there are no objects in it. That the bucket is empty. Else it will fail.
+In case an s3 bucket is of no use anymore, you can always delete it. But to delete an s3 bucket, you have to make sure that there are no objects in it. Else it will fail.
 
 In the same file, under `deleteBucket()` function, we implement the functionality of deleting a bucket:
 
@@ -596,15 +598,15 @@ mutation DeleteBucket {
 }
 ```
 
-- If you have one bucket, and it has files, go through [creating a s3 bucket](#creating-a-s3-bucket) and create a dummy bucket.
+- If you have one bucket, and it has files, go through [creating an s3 bucket](#creating-an-s3-bucket) and create a dummy bucket.
 
 - In the mutation, paste in its name in the `bucketName` value.
 
-- Hit the play button and examine the results. Remember that the bucket has to be empty.
+- Hit the play button and examine the results.
 
 ### Conclusion
 
-AWS S3 bucket is by far the most used cloud storage service. It provides the agility to be able to access objects. Uploading objects to a cloud storage service is better than flooding your server with bulk data.
+AWS S3 bucket is by far the most used cloud storage service. It provides the agility to be able to perform various operations on objects. Uploading objects to a cloud storage service is better than flooding your server with bulk data.
 
 AWS Node.js SDK provides more functionalities to s3 and other services than described in this article. To check them out, visit the [official docs](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/tutorials.html).
 
