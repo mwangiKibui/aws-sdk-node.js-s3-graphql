@@ -1,6 +1,6 @@
 ### Using AWS Node.js SDK to implement s3 functionalities on a GraphQL API
 
-AWS is a subsidiary of amazon offering cloud computing services. The services revolve around storage, application, and infrastructure based. S3 is the storage service provided by AWS. Node.js SDK from AWS enables one to access functionalities offered by the platform from a Node.js application. GraphQl on the other hand is a server-side runtime for executing queries based on a type system defined on the data providing a query language.
+AWS is a subsidiary of amazon offering cloud computing services. The services revolve around storage, application, and infrastructure based. S3 is the storage service provided by AWS. Node.js SDK from AWS enables one to access functionalities offered by the platform from a Node.js application. GraphQl on the other hand is a server-side runtime for executing queries based on a type system defined on the data. Providing a query language.
 
 In this article, we will walk through the various s3 functionalities using Node.js AWS SDK.
 
